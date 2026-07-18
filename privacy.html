@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabulary — Privacy Policy</title>
+<link rel="icon" href="./icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2ecdd; --surface: #faf5ea; --surface-2: #ece3cd;
+    --border: #d8c9a9; --border-strong: #c7b28c;
+    --text: #211c15; --text-muted: #6a6053; --text-faint: #7c7162;
+    --accent: #b94a28; --accent-hover: #a03f20; --accent-soft: #f5e1d5; --on-accent: #fffdf9;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17130f; --surface: #201b15; --surface-2: #29231b;
+      --border: #383027; --border-strong: #4a4030;
+      --text: #f2eadd; --text-muted: #b3a793; --text-faint: #7d7362;
+      --accent: #e4703e; --accent-hover: #f0855a; --accent-soft: #3a2418; --on-accent: #1a120c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  nav.top {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-brand { display: flex; align-items: center; gap: 9px; }
+  .nav-brand img { width: 26px; height: 26px; }
+  .nav-brand span { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; color: var(--text); }
+  .nav-links { display: flex; align-items: center; gap: 20px; font-size: 13.5px; }
+  .nav-links a { color: var(--text-muted); }
+  .nav-links a:hover { color: var(--accent); }
+
+  main { padding: 56px 0 80px; }
+  h1 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 34px; margin: 0 0 8px; }
+  .updated { color: var(--text-muted); font-family: var(--font-mono); font-size: 12.5px; margin-bottom: 40px; }
+  h2 { font-family: var(--font-display); font-weight: 600; font-size: 20px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+  p, li { font-size: 15px; color: var(--text); }
+  p { color: var(--text-muted); }
+  ul { padding-left: 20px; margin: 0; }
+  li { margin-bottom: 7px; color: var(--text-muted); }
+  li strong, li em { color: var(--text); font-style: normal; }
+  code {
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: 1.5px 6px; border-radius: 5px; font-family: var(--font-mono); font-size: 0.85em; color: var(--text);
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 24px; margin: 20px 0;
+  }
+  .card ul { margin: 0; }
+
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 460px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  th { color: var(--text-muted); font-weight: 600; font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; background: var(--surface-2); }
+  td { color: var(--text-muted); }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0 48px;
+    color: var(--text-faint); font-size: 13px;
+  }
+  footer .row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer .links { display: flex; gap: 18px; align-items: center; }
+  footer a { color: var(--text-muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="nav-brand">
+      <img src="./icon.png" alt="">
+      <span>Tabulary</span>
+    </div>
+    <div class="nav-links">
+      <a href="./index.html">Home</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="updated">TABULARY · LAST UPDATED 2026-07-18</p>
+
+    <p>Tabulary is a browser extension for saving and organizing open tabs. This page explains what data it handles, where it goes, and what control you have over it.</p>
+
+    <h2>The short version</h2>
+    <div class="card">
+      <ul>
+        <li>By default, everything you save stays on your device. No account, no server, no tracking.</li>
+        <li>If you choose to sign in with Google, your saved tabs and a small profile file (display name, optional photo, theme) are backed up to a private, hidden folder in <strong>your own</strong> Google Drive — never to any server we operate.</li>
+        <li>We don't run analytics, don't show ads, and don't sell or share your data with anyone.</li>
+      </ul>
+    </div>
+
+    <h2>What Tabulary stores, and where</h2>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Data</th><th>Where it lives</th><th>Who can see it</th></tr>
+        <tr><td>Boards, collections, saved tabs, tags</td><td>Your browser's local storage (IndexedDB)</td><td>Only you, on this device</td></tr>
+        <tr><td>Same, if you sign in with Google</td><td>Additionally: a hidden, app-private folder in your own Google Drive (Drive's <code>appDataFolder</code>)</td><td>Only you — invisible in your normal Drive view, inaccessible to any other app</td></tr>
+        <tr><td>Display name, profile photo, theme preference</td><td>Local storage, and the same private Drive folder if signed in with Google</td><td>Only you</td></tr>
+        <tr><td>Account identity (email, or Google sign-in)</td><td>Firebase Authentication (operated by Google) — used only to know who you are</td><td>You and Google's auth infrastructure; we don't separately store your password</td></tr>
+      </table>
+    </div>
+
+    <h2>Sign-in and Google Drive access</h2>
+    <p>Signing in is optional. Tabulary offers two ways:</p>
+    <ul>
+      <li><strong>Email and password</strong> — creates an account for identity only. Your tabs stay on the device unless you also connect Google.</li>
+      <li><strong>Google sign-in</strong> — also requests one additional, narrow permission: <code>drive.appdata</code>. This lets Tabulary read and write <em>only</em> its own hidden data folder in your Google Drive. It cannot see, list, or modify any of your actual files, photos, or documents in Drive.</li>
+    </ul>
+    <p style="margin-top:12px">You can revoke this access anytime from <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account → Security → Third-party apps</a>, or delete the stored data directly from Google Drive → Settings → Manage apps → Tabulary → "Delete hidden app data."</p>
+
+    <h2>What we don't do</h2>
+    <div class="card">
+      <ul>
+        <li>We don't run our own servers that store your tab data.</li>
+        <li>We don't use analytics, ad networks, or tracking pixels.</li>
+        <li>We don't sell, rent, or share your data with third parties.</li>
+        <li>We don't read the content of your actual browsing beyond the tabs you explicitly choose to save.</li>
+      </ul>
+    </div>
+
+    <h2>Browser permissions Tabulary requests</h2>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Permission</th><th>Why</th></tr>
+        <tr><td><code>tabs</code></td><td>To read the title/URL of your currently open tabs when you choose to save them.</td></tr>
+        <tr><td><code>storage</code>, <code>unlimitedStorage</code></td><td>To store your boards, collections, and tabs locally without a size cap.</td></tr>
+        <tr><td><code>identity</code></td><td>To run the Google sign-in flow.</td></tr>
+      </table>
+    </div>
+
+    <h2>Deleting your data</h2>
+    <p>You can export everything as a JSON file, clear your local data, clear your account's cloud data, or delete your account entirely — all from the extension's <strong>Settings → Data</strong> tab.</p>
+
+    <h2>Children's privacy</h2>
+    <p>Tabulary is not directed at children and we do not knowingly collect data from anyone under 13.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the "Last updated" date above will change accordingly.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© 2026 Tabulary — built by <a href="https://github.com/HishamSunjeq" target="_blank" rel="noopener">Hisham Sanjag</a></span>
+    <div class="links">
+      <a href="mailto:hishamsunjeq123@gmail.com">hishamsunjeq123@gmail.com</a>
+      <a href="./index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

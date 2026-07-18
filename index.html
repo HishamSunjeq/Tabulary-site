@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabulary — a fast, local-first tab manager</title>
+<meta name="description" content="Save your open browser tabs into unlimited boards and collections. No account required — optional free cloud backup via your own Google Drive.">
+<link rel="icon" href="./icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Same palette + type system as the Tabulary extension itself
+     (Reading Room theme) — this page is meant to look like it belongs
+     to the product, not like generic marketing copy bolted on after. */
+  :root {
+    --bg: #f2ecdd; --surface: #faf5ea; --surface-2: #ece3cd;
+    --border: #d8c9a9; --border-strong: #c7b28c;
+    --text: #211c15; --text-muted: #6a6053; --text-faint: #7c7162;
+    --accent: #b94a28; --accent-hover: #a03f20; --accent-soft: #f5e1d5; --on-accent: #fffdf9;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    --shadow: 0 1px 2px rgba(60,40,20,.08), 0 2px 8px rgba(60,40,20,.06);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17130f; --surface: #201b15; --surface-2: #29231b;
+      --border: #383027; --border-strong: #4a4030;
+      --text: #f2eadd; --text-muted: #b3a793; --text-faint: #7d7362;
+      --accent: #e4703e; --accent-hover: #f0855a; --accent-soft: #3a2418; --on-accent: #1a120c;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.3);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  nav.top {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-brand { display: flex; align-items: center; gap: 9px; }
+  .nav-brand img { width: 26px; height: 26px; }
+  .nav-brand span { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; color: var(--text); }
+  .nav-links { display: flex; align-items: center; gap: 20px; font-size: 13.5px; }
+  .nav-links a { color: var(--text-muted); }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  header.hero { padding: 88px 0 56px; text-align: center; }
+  .hero-mark { width: 84px; height: 84px; margin: 0 auto 22px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.12)); }
+  h1 {
+    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(34px, 6vw, 52px); margin: 0 0 14px; text-wrap: balance;
+  }
+  .tagline { font-size: 18px; color: var(--text-muted); max-width: 44ch; margin: 0 auto 32px; text-wrap: balance; }
+  .hero-cta { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 600; font-size: 14.5px;
+    padding: 11px 20px; border-radius: 10px; border: 1px solid transparent;
+  }
+  .btn.primary { background: var(--accent); color: var(--on-accent); box-shadow: var(--shadow); }
+  .btn.primary:hover { background: var(--accent-hover); text-decoration: none; }
+  .btn.ghost { border-color: var(--border-strong); color: var(--text); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ---------- sections ---------- */
+  section { padding: 8px 0 56px; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; display: block; margin-bottom: 10px;
+  }
+  h2 { font-family: var(--font-display); font-size: 26px; font-weight: 600; margin: 0 0 24px; letter-spacing: -0.01em; }
+
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 22px 20px; box-shadow: var(--shadow);
+  }
+  .feature .icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .feature b { display: block; margin-bottom: 6px; font-size: 15.5px; font-weight: 600; }
+  .feature p { margin: 0; color: var(--text-muted); font-size: 14px; line-height: 1.55; }
+
+  .privacy-band {
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .privacy-band p { margin: 4px 0 0; color: var(--text-muted); font-size: 14px; max-width: 46ch; }
+  .privacy-band strong { font-size: 16px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0 48px;
+    color: var(--text-faint); font-size: 13px;
+  }
+  footer .row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer .links { display: flex; gap: 18px; align-items: center; }
+  footer a { color: var(--text-muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="nav-brand">
+      <img src="./icon.png" alt="">
+      <span>Tabulary</span>
+    </div>
+    <div class="nav-links">
+      <a href="./privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="hero-mark" src="./icon.png" alt="Tabulary">
+    <h1>Your tabs, finally organized.</h1>
+    <p class="tagline">A fast, local-first tab manager. Save your open tabs into unlimited boards and collections — no account, no size cap, nothing to configure.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="./privacy.html">Read the privacy policy</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">What it does</span>
+    <h2>Built to stay out of your way.</h2>
+    <div class="features">
+      <div class="feature">
+        <span class="icon">🗂️</span>
+        <b>Boards, collections, and tags</b>
+        <p>Organize saved tabs however you like — drag and drop to reorder, tag and search across everything you've ever saved.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">💾</span>
+        <b>Works fully offline</b>
+        <p>Everything lives on your device by default. No account required, no data sent anywhere unless you choose to sign in.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">☁️</span>
+        <b>Optional free cloud backup</b>
+        <p>Sign in with Google to back up your tabs to your own Google Drive — private to you, never on a server we run.</p>
+      </div>
+      <div class="feature">
+        <span class="icon">📤</span>
+        <b>Your data, exportable anytime</b>
+        <p>Take everything with you as a plain JSON file whenever you want — import it back in, or into anything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="privacy-band">
+      <div>
+        <strong>No tracking. No ads. No selling your data.</strong>
+        <p>Tabulary doesn't run its own servers for your tabs and doesn't analyze how you use it. See exactly what it stores and where.</p>
+      </div>
+      <a class="btn ghost" href="./privacy.html">Privacy Policy →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <span>© 2026 Tabulary — built by <a href="https://github.com/HishamSunjeq" target="_blank" rel="noopener">Hisham Sanjag</a></span>
+    <div class="links">
+      <a href="mailto:hishamsunjeq123@gmail.com">hishamsunjeq123@gmail.com</a>
+      <a href="./privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
